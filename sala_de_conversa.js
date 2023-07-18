@@ -29,18 +29,19 @@ function criar_uma_sala()
 
 
   function getData() {firebase.database().ref("/").on('value',
-function(snapshot) {document.getElementById("output").innerHTML =
+function(snapshot) {document.getElementById("salas").innerHTML =
 "";snapshot.forEach(function(childSnapshot) {childKey =
 childSnapshot.key;
 roomNames = childKey;
 //Início do código
-
+var caixa="<div id='"+roomNames+"' onclick='redirecionar_sala(this.id)'>"+roomNames+"</div> <hr>";
+document.getElementById("salas").innerHTML+=caixa;
 //Fim do código
 });});}
 getData();
 
 
-function redirectToNome_da_sala(name)
+function redirecionar_sala(name)
 {
   console.log(name);
   localStorage.setItem("nome_da_sala", name);
