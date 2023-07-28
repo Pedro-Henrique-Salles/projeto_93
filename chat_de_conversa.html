@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sala_de_conversa.css">
+    <title>Chat de conversa</title>
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+</head>
+<body>
+    <button onclick="sair()">Sair</button>
+    <br>
+    <h1>Chat_de_conversa</h1>
+    <br>
+    <div id="mensagens"></div>
+    <label>adicionar mensagem:</label>
+    <br>
+    <input type="text" id="mensagem">
+    <br>
+    <br>
+    <button onclick="enviar_mensagem()">Enviar</button>
+    <script src="chat_de_conversa.js"></script>
+</body>
+</html>
