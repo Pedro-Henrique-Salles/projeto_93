@@ -25,27 +25,36 @@ function enviar_mensagem() {
 }
 
 
-  function getData() {firebase.database().ref("/").on('value',
-function(snapshot) {document.getElementById("salas").innerHTML =
-"";snapshot.forEach(function(childSnapshot) {childKey =
-childSnapshot.key;
+  function getData() {firebase.database().ref("/"+nome_da_sala).on('value',
+function(snapshot) {document.getElementById("mensagens").innerHTML ="";
+snapshot.forEach(function(childSnapshot) {childKey =childSnapshot.key;
 var childData=childSnapshot.val();
 if (childKey!="purpose") {
     var id_msg_firebase=childKey;
-}
-//Início do código
-var caixa="<div id='"+roomNames+"' onclick='redirecionar_sala(this.id)'>"+roomNames+"</div> <hr>";
-document.getElementById("salas").innerHTML+=caixa;
-//Fim do código
+    var dado_da_msg=childData;
+    var nome_usuario=dado_da_msg["name"];
+    var mensagem_usuario=dado_da_msg["message"];
+    var curtidas=dado_da_msg["like"];
+    var tag_nome_do_usuario="<h4>"+nome_usuario+"</h4>";
+    var tag_mensagem="<h4>"+mensagem_usuario+"</h4>";
+    var tag_btn_like="<button id='"+id_msg_firebase+"' value='"+curtidas+"' onclick='atuliza_like(this.id)'>";
+    var tag_span="<span class='glyphicon glyphicon-thumbs-up'>like: "+curtidas+"</span> </button> <hr>";
+    var caixa=tag_nome_do_usuario+tag_mensagem+tag_btn_like+tag_span;
+    document.getElementById("mensagens").innerHTML+=caixa;
+  }
+
 });});}
 getData();
 
 
-function redirecionar_sala(name)
-{
-  console.log(name);
-  localStorage.setItem("nome_da_sala", name);
-    window.location = "chat_de_conversa.html";
+//function atualiza_like
+function atualiza_like(id_da_mensagem){
+  var id_btn=id_da_mensagem;
+  var numeros_curtidas=document.getElementById(id_btn).value;
+  var atualiza_like=Number(numeros_curtidas)+1;
+  firebase.database().ref(nome_da_sala).child(id_da_mensagem).update({
+    like:atualiza_like
+  });
 }
 
 
